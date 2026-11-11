@@ -1,0 +1,55 @@
+# Build systems
+.gradle/
+.kotlin/
+build/
+.externalNativeBuild/
+.cxx/
+
+# Local configuration and IDE state
+local.properties
+*.iml
+.idea/
+.vscode/
+captures/
+
+# Credentials and private configuration
+.env
+.env.*
+.mcp.json
+.pico-env.json
+.trae/
+.pico/
+*.jks
+*.keystore
+*.pem
+*.p12
+*.pfx
+*signing*.properties
+google-services.json
+
+# Internal agent and validation material
+.scratch/
+history/
+AGENTS.md
+*-AGENTS.md
+debug-*.md
+
+# Generated outputs: publish only the final icon and poster
+/output/*
+!/output/artwork/
+/output/artwork/*
+!/output/artwork/fangkemeng-icon.png
+!/output/artwork/fangkemeng-poster.png
+
+# Packages, diagnostics, and OS files
+*.apk
+*.aab
+*.hprof
+*.trace
+*.perfetto-trace
+*.rdc
+*.log
+*.zip
+*.tar.gz
+output.json
+.DS_Store
