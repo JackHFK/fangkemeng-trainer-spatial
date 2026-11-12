@@ -1,17 +1,7 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-}
-
-val releaseSigningFile = file(
-    providers.environmentVariable("FANGKEMENG_RELEASE_SIGNING_PROPERTIES")
-        .getOrElse("${System.getProperty("user.home")}/.pico/signing/fangkemeng/release.properties")
-)
-val releaseSigning = Properties().apply {
-    if (releaseSigningFile.isFile) releaseSigningFile.inputStream().use { load(it) }
 }
 
 android {
@@ -29,23 +19,12 @@ android {
         }
     }
 
-    signingConfigs {
-        create("production") {
-            storeFile = file(releaseSigning.getProperty("storeFile",
-                "${System.getProperty("user.home")}/.pico/signing/fangkemeng/release.p12"))
-            storePassword = releaseSigning.getProperty("storePassword")
-            keyAlias = releaseSigning.getProperty("keyAlias")
-            keyPassword = releaseSigning.getProperty("keyPassword")
-            storeType = "PKCS12"
-        }
-    }
-
     buildTypes {
         release {
             isDebuggable = false
             isMinifyEnabled = true
             isShrinkResources = true
-            signingConfig = signingConfigs.getByName("production")
+            // Release APK 由 PICO Vibe Lab 平台统一签名。
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

@@ -32,7 +32,7 @@
 | 输入 | 头部与手部追踪、空间交互 |
 | 测试 | JUnit |
 | 开发工具 | pico-cli |
-| 构建 | Gradle 8.10.2、Android Gradle Plugin 8.8.2 |
+| 构建 | Gradle 8.13、Android Gradle Plugin 8.13.2 |
 
 营地、编队和路线显示在窗口中，战斗在 Mixed Stage 中展开。
 
@@ -44,21 +44,24 @@
 
 ## 构建与运行
 
-安装并初始化 pico-cli：
+准备 JDK 17 和 Android SDK Platform 35，通过 `ANDROID_HOME` 指向 SDK 目录。在仓库根目录构建 Release：
 
 ```bash
-npm install -g @picoxr/pico-cli && pico-cli setup
+./gradlew assembleRelease
 ```
 
-构建 APK：
+产物为 `app/build/outputs/apk/release/app-release-unsigned.apk`。向 PICO Vibe Lab 提交 GitHub 仓库地址和 `git rev-parse HEAD` 输出的完整 40 位提交编号，APK 由平台统一签名。
+
+本地测试与 Debug 构建：
 
 ```bash
 ./gradlew :app:testDebugUnitTest :app:assembleDebug --console=plain
 ```
 
-使用 pico-cli 安装和启动：
+安装并初始化 pico-cli，然后安装和启动 Debug APK：
 
 ```bash
+npm install -g @picoxr/pico-cli && pico-cli setup
 pico-cli app install app/build/outputs/apk/debug/app-debug.apk
 pico-cli app launch com.example.fangkemeng --activity .app.LaunchActivity
 ```
