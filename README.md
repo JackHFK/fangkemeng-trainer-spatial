@@ -32,7 +32,7 @@ Development used pico-cli to list devices, install and launch APKs, capture Spat
 | Input | Head and hand tracking, spatial interaction |
 | Testing | JUnit |
 | Development tools | pico-cli |
-| Build | Gradle 8.10.2, Android Gradle Plugin 8.8.2 |
+| Build | Gradle 8.13, Android Gradle Plugin 8.13.2 |
 
 Camp, party preparation, and route selection appear in a window, while battles take place in a Mixed Stage.
 
@@ -44,21 +44,24 @@ The game icon and poster are in [`output/artwork`](output/artwork/).
 
 ## Build and Run
 
-Install and set up pico-cli:
+Install JDK 17 and Android SDK Platform 35, and set `ANDROID_HOME` to the SDK directory. Build Release from the repository root:
 
 ```bash
-npm install -g @picoxr/pico-cli && pico-cli setup
+./gradlew assembleRelease
 ```
 
-Build the APK:
+The output is `app/build/outputs/apk/release/app-release-unsigned.apk`. Submit the GitHub repository URL and the full 40-character commit ID from `git rev-parse HEAD` to PICO Vibe Lab; the platform signs the APK.
+
+Run local tests and build Debug:
 
 ```bash
 ./gradlew :app:testDebugUnitTest :app:assembleDebug --console=plain
 ```
 
-Install and launch with pico-cli:
+Install and set up pico-cli, then install and launch the Debug APK:
 
 ```bash
+npm install -g @picoxr/pico-cli && pico-cli setup
 pico-cli app install app/build/outputs/apk/debug/app-debug.apk
 pico-cli app launch com.example.fangkemeng --activity .app.LaunchActivity
 ```
